@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TurfBuddie — Sales Kit</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f3f6f4;--cd:#fff;--tx:#14201a;--mu:#5b6b62;--br:#dbe3de;--ac:#128c4a;--acb:#e3f6ea;--ach:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1512;--cd:#16201b;--tx:#e8f0ec;--mu:#98a9a0;--br:#27352e;--ac:#3ddc84;--acb:#173323;--ach:#0e1512}}
+:root[data-theme="dark"]{--bg:#0e1512;--cd:#16201b;--tx:#e8f0ec;--mu:#98a9a0;--br:#27352e;--ac:#3ddc84;--acb:#173323;--ach:#0e1512}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.w{max-width:900px;margin:0 auto;padding:16px 14px 50px}
+h1{font-size:24px;margin:6px 0 2px}h2{font-size:18px;margin:30px 0 10px}p.s{margin:0;color:var(--mu)}
+.hero{background:var(--ac);color:var(--ach);border-radius:14px;padding:18px;margin-top:10px}
+.hero b{font-size:17px}
+.cd{background:var(--cd);border:1px solid var(--br);border-radius:12px;padding:14px}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+label{display:block;font-size:12px;color:var(--mu);margin:8px 0 3px}
+input,select,textarea,button{font:inherit;color:var(--tx)}
+input,select{width:100%;padding:8px 10px;border:1px solid var(--br);border-radius:8px;background:var(--cd)}
+button{padding:8px 12px;border:1px solid var(--br);border-radius:8px;background:var(--cd);cursor:pointer}
+button.p{background:var(--ac);border-color:var(--ac);color:var(--ach);font-weight:600}
+.big{font-size:28px;font-weight:700;color:var(--ac)}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--br)}
+.msg{white-space:pre-line;background:var(--acb);border-radius:10px;padding:10px 12px;margin:8px 0}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}
+.st div{background:var(--acb);border-radius:10px;padding:8px;text-align:center}.st b{display:block;font-size:20px}
+.sc{overflow-x:auto}table{width:100%;min-width:480px;border-collapse:collapse}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--br);font-size:14px}th{color:var(--mu);font-size:12px;text-transform:uppercase}
+ul{margin:4px 0 0;padding-left:20px}li{margin:4px 0}
+.ck{display:flex;gap:8px;align-items:flex-start;margin:6px 0}.ck input{width:auto;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>🏟 TurfBuddie — Sales Kit</h1>
+<p class="s">Turf owners ko onboard karo → unke slots live karo → bookings start.</p>
+
+<div class="hero"><b>30-second pitch</b><br>
+"Sir, aapki turf ke khali slots TurfBuddie par live ho jayenge. Players seedha online book karenge, payment aapko milega, aur har booking ka WhatsApp alert turant aayega. Slot block/open karna ho to bas WhatsApp pe <i>BLOCK 10AM</i> likhna hai. Koi app seekhne ki zaroorat nahi, setup hum karte hain."</div>
+
+<h2>1. Owner ko dikhane ke liye — Extra revenue calculator</h2>
+<div class="g">
+<div class="cd">
+<label>Turf ke slot per day (hours)</label><input id="c1" type="number" value="12">
+<label>Average rate per hour (₹)</label><input id="c2" type="number" value="800">
+<label>Abhi occupancy (%)</label><input id="c3" type="number" value="50">
+<label>TurfBuddie se expected occupancy (%)</label><input id="c4" type="number" value="70">
+<label>Commission (%) — apna rate set karo</label><input id="c5" type="number" value="10">
+</div>
+<div class="cd">
+<div class="row"><span>Abhi monthly revenue</span><b id="r1"></b></div>
+<div class="row"><span>Expected monthly revenue</span><b id="r2"></b></div>
+<div class="row"><span>Extra bookings / month</span><b id="r3"></b></div>
+<div class="row"><span>TurfBuddie commission</span><b id="r4"></b></div>
+<p class="s" style="margin-top:10px">Owner ka extra kamai (commission ke baad)</p>
+<div class="big" id="r5"></div>
+<p class="s" style="font-size:12px">Ye estimate hai, guarantee nahi. Occupancy numbers owner ke saath baith ke bharo.</p>
+</div>
+</div>
+
+<h2>2. Lead tracker (Turf owners pipeline)</h2>
+<div class="cd">
+<div class="st" id="stats"></div>
+<div class="g" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+<input id="tn" placeholder="Turf name"><input id="on" placeholder="Owner name"><input id="ph" placeholder="Phone"><input id="ar" placeholder="Area">
+</div>
+<div style="margin-top:8px"><button class="p" id="add">+ Add lead</button></div>
+<div class="sc" style="margin-top:10px"><table><thead><tr><th>Turf</th><th>Owner</th><th>Phone</th><th>Stage</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="s" style="font-size:12px;margin-top:6px">Data sirf is browser mein save hota hai. Team-wide tracking ke liye Sheet/Notion/CRM se connect karna padega.</p>
+</div>
+
+<h2>3. Copy-paste WhatsApp messages</h2>
+<div id="msgs"></div>
+
+<h2>4. Objection handling</h2>
+<div class="cd sc"><table>
+<tr><th>Owner bolega</th><th>Jawab</th></tr>
+<tr><td>"Mere paas already customers hain."</td><td>"Wo rahenge. Hum sirf khali slots bharte hain, khaaskar weekday morning/afternoon."</td></tr>
+<tr><td>"Commission kyun dein?"</td><td>"Booking aayegi tabhi commission. Joining ka risk nahi. Pehle live karke dekh lijiye."</td></tr>
+<tr><td>"Technology samajh nahi aati."</td><td>"Kuch seekhna nahi. Slot update WhatsApp message se hota hai, setup hum kar dete hain."</td></tr>
+<tr><td>"Double booking ho gayi to?"</td><td>"Slot ek baar book hote hi system block kar deta hai. Aapko turant WhatsApp alert milta hai."</td></tr>
+<tr><td>"Payment kab milega?"</td><td>"Payout schedule onboarding ke time clear likhit mein share karenge." (apna actual payout cycle yahan bharo)</td></tr>
+<tr><td>"Sochke batata hun."</td><td>"Bilkul. Kal 5 min ka live demo dikha doon? Phir decide kar lijiye."</td></tr>
+</table></div>
+
+<h2>5. Onboarding checklist (1 turf = ~30 min)</h2>
+<div class="cd" id="ck"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+function calc(){
+  const h=+$('c1').value||0,r=+$('c2').value||0,a=(+$('c3').value||0)/100,b=(+$('c4').value||0)/100,c=(+$('c5').value||0)/100;
+  const cur=h*r*a*30,exp=h*r*b*30,extra=exp-cur,com=extra*c;
+  $('r1').textContent=fmt(cur);$('r2').textContent=fmt(exp);
+  $('r3').textContent=Math.max(0,Math.round(h*(b-a)*30))+' slots';
+  $('r4').textContent=fmt(com);$('r5').textContent=fmt(extra-com)+' / month';
+}
+['c1','c2','c3','c4','c5'].forEach(i=>$(i).oninput=calc);calc();
+
+const ST=['New','Contacted','Demo done','Onboarded'];
+let L=[];try{L=JSON.parse(localStorage.getItem('tbleads')||'[]')}catch(e){}
+function save(){try{localStorage.setItem('tbleads',JSON.stringify(L))}catch(e){}}
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function draw(){
+  $('stats').innerHTML=ST.map((s,i)=>'<div><b>'+L.filter(x=>x.s==i).length+'</b>'+s+'</div>').join('');
+  $('tb').innerHTML=L.length?L.map((x,i)=>'<tr><td>'+esc(x.t)+'<br><small>'+esc(x.a)+'</small></td><td>'+esc(x.o)+'</td><td>'+esc(x.p)+'</td><td><select data-i="'+i+'">'+ST.map((s,j)=>'<option value="'+j+'"'+(j==x.s?' selected':'')+'>'+s+'</option>').join('')+'</select></td><td><button data-d="'+i+'">✕</button></td></tr>').join(''):'<tr><td colspan="5">Abhi koi lead nahi. Upar se add karo.</td></tr>';
+  document.querySelectorAll('#tb select').forEach(e=>e.onchange=()=>{L[+e.dataset.i].s=+e.value;save();draw()});
+  document.querySelectorAll('#tb button').forEach(e=>e.onclick=()=>{L.splice(+e.dataset.d,1);save();draw()});
+}
+$('add').onclick=()=>{const t=$('tn').value.trim();if(!t)return;L.push({t,o:$('on').value.trim(),p:$('ph').value.trim(),a:$('ar').value.trim(),s:0});['tn','on','ph','ar'].forEach(i=>$(i).value='');save();draw()};
+draw();
+
+const M=[
+['First message (cold)','Namaste [Owner Name] ji, main [Aapka Naam], TurfBuddie se. Hum turf slots ko online book karwane ka platform chalate hain. Aapki [Turf Name] ke khali slots par extra bookings la sakte hain, bina kisi setup cost ke. 5 minute ka demo dikha sakta/sakti hun. Kab free honge?'],
+['Follow-up (no reply, 2 din baad)','Namaste [Owner Name] ji, pichle message ka follow-up. Weekday ke khali slots bharna hamara main kaam hai. Aap bolen to 5 min mein dikha dun ki booking aur WhatsApp alert kaise kaam karta hai.'],
+['Demo ke baad','[Owner Name] ji, demo ke liye thank you. Summary: (1) slots online live honge, (2) har booking ka WhatsApp alert aayega, (3) slot block/open WhatsApp se hi hoga. Next step: turf ke slots aur rates bhej dijiye, hum aaj hi live kar dete hain.'],
+['Onboarding details maangna','[Owner Name] ji, onboarding ke liye ye bhej dijiye:\n1. Turf ka naam aur address (Google Maps location)\n2. Sports/formats (5v5, 7v7, cricket...)\n3. Slot timings aur rate per hour (weekday/weekend)\n4. 4-5 photos\n5. Booking alert ke liye WhatsApp number\n6. Payout ke liye bank details'],
+['Go-live confirmation','Badhai ho [Owner Name] ji! [Turf Name] ab TurfBuddie par live hai. Booking aate hi is number par WhatsApp alert aayega. Slot block karna ho to bhejein: BLOCK 10AM. Koi dikkat ho to yahin message karein.']
+];
+$('msgs').innerHTML=M.map((m,i)=>'<div class="cd" style="margin-bottom:10px"><b>'+m[0]+'</b><div class="msg" id="m'+i+'">'+esc(m[1])+'</div><button class="p" data-c="'+i+'">Copy</button></div>').join('');
+document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{
+  const el=$('m'+b.dataset.c),t=el.textContent;
+  const ok=()=>{b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1500)};
+  try{navigator.clipboard.writeText(t).then(ok,()=>sel(el))}catch(e){sel(el)}
+  function sel(el){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Select ho gaya, copy karein'}
+});
+
+const C=['Owner ka naam, phone aur WhatsApp number liya','Turf ka address + Google Maps location','Sports/formats aur slot timings','Weekday/weekend rates','Photos (4-5) collect kiye','Booking alert number set kiya','Slot commands demo (BLOCK / UNBLOCK) owner ko sikhaya','Test booking karke owner ko alert dikhaya','Payout details aur commission terms confirm kiye','Turf live — owner ko go-live message bheja'];
+$('ck').innerHTML=C.map(c=>'<label class="ck" style="font-size:15px;color:inherit;margin:6px 0"><input type="checkbox"> '+c+'</label>').join('');
+</script>
+</body>
+</html>
